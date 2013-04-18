@@ -34,13 +34,13 @@ fi
 APACHE_URL="http://ubuntuone.com/0s3sf3BIxej4LSoIW2ZrJb"
 echo "-----> Bundling Apache version $APACHE_VERSION"
 curl -C --location "$APACHE_URL" -o apache.tar.gz
-tar xz apache.tar.gz
+tar zxf apache.tar.gz
 
 #PHP_URL="https://s3-ap-southeast-2.amazonaws.com/ngson2000/php-$PHP_VERSION.tar.gz"
 PHP_URL="http://ubuntuone.com/5xBfkrVdjt5EZpJRMjO0EE"
 echo "-----> Bundling PHP version $PHP_VERSION"
 curl -C --location "$PHP_URL" -o php.tar.gz
-tar xz php.tar.gz
+tar zxf php.tar.gz
 
 
 # update config files
