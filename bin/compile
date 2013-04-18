@@ -30,25 +30,29 @@ if [ -f www/Procfile ]; then
   mv www/Procfile .
 fi
 
-APACHE_URL="https://s3-ap-southeast-2.amazonaws.com/ngson2000/apache-$APACHE_VERSION.tar.gz"
+#APACHE_URL="https://s3-ap-southeast-2.amazonaws.com/ngson2000/apache-$APACHE_VERSION.tar.gz"
+APACHE_URL="http://ubuntuone.com/0s3sf3BIxej4LSoIW2ZrJb"
 echo "-----> Bundling Apache version $APACHE_VERSION"
-curl --silent --max-time 60 --location "$APACHE_URL" | tar xz
+curl -C --location "$APACHE_URL" -o apache.tar.gz
+tar xz apache.tar.gz
 
-PHP_URL="https://s3-ap-southeast-2.amazonaws.com/ngson2000/php-$PHP_VERSION.tar.gz"
+#PHP_URL="https://s3-ap-southeast-2.amazonaws.com/ngson2000/php-$PHP_VERSION.tar.gz"
+PHP_URL="http://ubuntuone.com/5xBfkrVdjt5EZpJRMjO0EE"
 echo "-----> Bundling PHP version $PHP_VERSION"
-curl --silent --max-time 60 --location "$PHP_URL" | tar xz
+curl -C --location "$PHP_URL" -o php.tar.gz
+tar xz php.tar.gz
+
 
 # update config files
 cp $LP_DIR/conf/httpd.conf $APACHE_PATH/conf
 cp $LP_DIR/conf/php.ini $PHP_PATH
-cp $LP_DIR/conf/config.php www/htdocs
 
 # make php available on bin
 mkdir -p bin
 ln -s /app/php/bin/php bin/php
 
 # create mahara data folder
-mkdir -p /app/maharadata
+# mkdir -p /app/maharadata
 
 cat >>boot.sh <<EOF
 for var in \`env|cut -f1 -d=\`; do
